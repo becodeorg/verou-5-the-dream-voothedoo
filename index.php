@@ -10,13 +10,17 @@
     <h1>The Dream</h1>
     <h2>Currency calculator</h2>
     </section>
+    <form action="">
+      <button type="submit">Switch</button>
+    </form>
     <form action="" method="POST">
-      <label for="amount">Calculate</label>
+      <label for="amount">Calculate Euros</label>
       <input type="number" step="0.01" name="amount" id="amount">
-      <label for="currency">Currency</label>
+      <label for="currency">To</label>
       <select name="currency" id="currency">
-        <option value="eur">EUR</option>
+        <option value="usd">USD</option>
         <option value="ron">RON</option>
+        <option value="cad">CAD</option>
       </select>
       <button type="submit">Calculate</button>
       <?php
@@ -24,17 +28,23 @@
           $selectOption = $_POST["currency"];
           $amount = $_POST["amount"];
           if ($selectOption === "ron") {
-              $result = $amount / 4.5;
-              $result = round($result,2);
-              ?>
-              <p><?php echo "$amount RON = $result EUR"; ?></p>
-              <?php
-          } else {
               $result = $amount * 4.5;
               $result = round($result,2);
               ?>
               <p><?php echo "$amount EUR = $result RON"; ?></p>
               <?php
+          } else if ($selectOption === "usd"){
+              $result = $amount * 1.09;
+              $result = round($result,2);
+              ?>
+              <p><?php echo "$amount EUR = $result USD"; ?></p>
+              <?php
+          } else {
+            $result = $amount * 1.46;
+            $result = round($result,2);
+            ?>
+            <p><?php echo "$amount EUR = $result CAD" ?> </p>
+            <?php
           }
       }
       ?>
